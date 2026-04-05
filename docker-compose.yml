@@ -1,0 +1,108 @@
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: hotel-postgres
+    environment:
+      POSTGRES_USER: hotel
+      POSTGRES_PASSWORD: hotel
+      POSTGRES_DB: hoteldb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: hotel-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  api-gateway:
+    build: ./hotel-api-gateway
+    container_name: hotel-api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - room-service
+      - booking-service
+      - guest-service
+      - housekeeping-service
+      - billing-service
+      - notification-service
+
+  room-service:
+    build: ./hotel-room-service
+    container_name: hotel-room-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hoteldb
+      SPRING_DATASOURCE_USERNAME: hotel
+      SPRING_DATASOURCE_PASSWORD: hotel
+
+  booking-service:
+    build: ./hotel-booking-service
+    container_name: hotel-booking-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - postgres
+      - rabbitmq
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hoteldb
+      SPRING_DATASOURCE_USERNAME: hotel
+      SPRING_DATASOURCE_PASSWORD: hotel
+      SPRING_RABBITMQ_HOST: rabbitmq
+
+  guest-service:
+    build: ./hotel-guest-service
+    container_name: hotel-guest-service
+    ports:
+      - "8083:8083"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hoteldb
+      SPRING_DATASOURCE_USERNAME: hotel
+      SPRING_DATASOURCE_PASSWORD: hotel
+
+  housekeeping-service:
+    build: ./hotel-housekeeping-service
+    container_name: hotel-housekeeping-service
+    ports:
+      - "8084:8084"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hoteldb
+      SPRING_DATASOURCE_USERNAME: hotel
+      SPRING_DATASOURCE_PASSWORD: hotel
+
+  billing-service:
+    build: ./hotel-billing-service
+    container_name: hotel-billing-service
+    ports:
+      - "8085:8085"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hoteldb
+      SPRING_DATASOURCE_USERNAME: hotel
+      SPRING_DATASOURCE_PASSWORD: hotel
+
+  notification-service:
+    build: ./hotel-notification-service
+    container_name: hotel-notification-service
+    ports:
+      - "8086:8086"
+    depends_on:
+      - rabbitmq
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq
+
+volumes:
+  postgres_data:
