@@ -100,7 +100,7 @@ The system sends automated notifications for:
 
 | Layer              | Technology                    |
 |--------------------|-------------------------------|
-| Language           | Java 17+                      |
+| Language           | Java 21                       |
 | Architecture       | Microservices                 |
 | Build Tool         | Maven / Gradle                |
 | Database           | PostgreSQL (per service)      |
