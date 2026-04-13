@@ -1,5 +1,7 @@
 package com.hotel.common.model;
 
+import com.hotel.common.enums.BookingStatus;
+
 import java.time.LocalDate;
 
 public class RoomBooking {
@@ -9,10 +11,10 @@ public class RoomBooking {
     private String guestName;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
-    private String status;
+    private BookingStatus status;
 
     // room booking constructor
-    public RoomBooking(String bookingId, Room room, String guestName, LocalDate checkInDate, LocalDate checkOutDate, String status) {
+    public RoomBooking(String bookingId, Room room, String guestName, LocalDate checkInDate, LocalDate checkOutDate, BookingStatus status) {
         this.bookingId = bookingId;
         this.room = room;
         this.guestName = guestName;
@@ -61,11 +63,11 @@ public class RoomBooking {
         this.checkOutDate = checkOutDate;
     }
 
-    public String getStatus() {
+    public BookingStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(BookingStatus status) {
         this.status = status;
     }
 }
