@@ -6,14 +6,14 @@ import java.time.LocalDate;
 
 public class RoomHouseKeeping {
 
-    private String houseKeeperName;
+    private Housekeeper houseKeeperName;
     private LocalDate startDate;
     private LocalDate endDate;
     private HouseKeepingStatus status;
     private String notes;
     private Room room;
 
-    public RoomHouseKeeping(String houseKeeperName, LocalDate startDate, LocalDate endDate, HouseKeepingStatus status, String notes, Room room) {
+    public RoomHouseKeeping(Housekeeper houseKeeperName, LocalDate startDate, LocalDate endDate, HouseKeepingStatus status, String notes, Room room) {
         this.houseKeeperName = houseKeeperName;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -22,11 +22,11 @@ public class RoomHouseKeeping {
         this.room = room;
     }
 
-    public String getHouseKeeperName() {
+    public Housekeeper getHouseKeeperName() {
         return houseKeeperName;
     }
 
-    public void setHouseKeeperName(String houseKeeperName) {
+    public void setHouseKeeperName(Housekeeper houseKeeperName) {
         this.houseKeeperName = houseKeeperName;
     }
 

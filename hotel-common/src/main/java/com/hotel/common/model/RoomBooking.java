@@ -8,13 +8,13 @@ public class RoomBooking {
 
     private String bookingId;
     private Room room;
-    private String guestName;
+    private Guest guestName;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private BookingStatus status;
 
     // room booking constructor
-    public RoomBooking(String bookingId, Room room, String guestName, LocalDate checkInDate, LocalDate checkOutDate, BookingStatus status) {
+    public RoomBooking(String bookingId, Room room, Guest guestName, LocalDate checkInDate, LocalDate checkOutDate, BookingStatus status) {
         this.bookingId = bookingId;
         this.room = room;
         this.guestName = guestName;
@@ -39,11 +39,11 @@ public class RoomBooking {
         this.room = room;
     }
 
-    public String getGuestName() {
+    public Guest getGuestName() {
         return guestName;
     }
 
-    public void setGuestName(String guestName) {
+    public void setGuestName(Guest guestName) {
         this.guestName = guestName;
     }
 
