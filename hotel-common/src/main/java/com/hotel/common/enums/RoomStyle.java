@@ -4,4 +4,5 @@ public enum RoomStyle {
     STANDARD,
     DELUXE,
     FAMILY_SUITE,
+    business_Suite;
 }
