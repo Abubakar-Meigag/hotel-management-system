@@ -29,7 +29,7 @@ public class Room {
     }
 
     // JPA requires a no-argument constructor like this Room() constructor
-    public Room() {};
+    public Room() {}
 
     public Long getId() {
         return id;
