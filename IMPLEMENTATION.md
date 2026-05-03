@@ -69,9 +69,10 @@ Complete each phase before moving to the next.
 
 1. Create a `RoomService` with methods to add a room, update room status, and search available rooms
 2. Create a `BookingService` with methods to create a booking, cancel a booking, check in, and check out
-3. Create a `HouseKeepingService` with methods to assign a housekeeper and update task status
-4. Create a `BillingService` with methods to generate an invoice and process a payment
-5. Wire services together where needed (for example, checking out triggers billing and housekeeping)
+3. Create a `GuestService` with methods to register a guest and find a guest by id 
+4. Create a `HouseKeepingService` with methods to assign a housekeeper and update task status 
+5. Create a `BillingService` with methods to generate an invoice and process a payment 
+6. Wire services together where needed (for example, checking out triggers billing and housekeeping)
 
 ---
 
