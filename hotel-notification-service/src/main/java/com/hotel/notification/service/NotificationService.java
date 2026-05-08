@@ -1,14 +1,13 @@
 package com.hotel.notification.service;
 
 import com.hotel.common.interfaces.NotificationSender;
+import com.hotel.common.notification.EmailNotification;
+import org.springframework.stereotype.Service;
 
+@Service
 public class NotificationService {
 
-    private NotificationSender sender;
-
-    public NotificationService(NotificationSender sender) {
-        this.sender = sender;
-    }
+    private NotificationSender sender = new EmailNotification("", "", "");
 
     public void sendBookingConfirmation(String recipient){
         sender.sendNotification(recipient, "Booking Confirmation");

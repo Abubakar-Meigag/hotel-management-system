@@ -1,7 +1,9 @@
 package com.hotel.common.notification;
 
 import com.hotel.common.interfaces.NotificationSender;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EmailNotification implements NotificationSender {
 
     private String email;
