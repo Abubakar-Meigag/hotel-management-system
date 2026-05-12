@@ -24,6 +24,7 @@ public class CheckoutEventListener {
         task.setStatus(HouseKeepingStatus.PENDING);
         task.setNotes("Room cleaning required after checkout");
         houseKeepingService.assignHousKeeping(task);
+        System.out.println(">>> HOUSEKEEPING TASK SAVED");
     }
 }
 
