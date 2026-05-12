@@ -1,6 +1,10 @@
 server:
   port: 8084
-
 spring:
   application:
     name: hotel-housekeeping-service
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
