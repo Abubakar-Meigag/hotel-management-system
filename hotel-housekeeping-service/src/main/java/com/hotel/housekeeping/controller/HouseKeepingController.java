@@ -7,7 +7,7 @@ import com.hotel.housekeeping.service.HouseKeepingService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/housekeeping")
+@RequestMapping("/api/housekeeping")
 public class HouseKeepingController {
 
 

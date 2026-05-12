@@ -4,9 +4,9 @@ services:
     image: postgres:16
     container_name: hotel-postgres
     environment:
-      POSTGRES_USER: hotel
-      POSTGRES_PASSWORD: hotel
-      POSTGRES_DB: hoteldb
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
     volumes:
@@ -40,9 +40,9 @@ services:
     depends_on:
       - postgres
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hoteldb
-      SPRING_DATASOURCE_USERNAME: hotel
-      SPRING_DATASOURCE_PASSWORD: hotel
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
 
   booking-service:
     build: ./hotel-booking-service
@@ -53,9 +53,9 @@ services:
       - postgres
       - rabbitmq
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hoteldb
-      SPRING_DATASOURCE_USERNAME: hotel
-      SPRING_DATASOURCE_PASSWORD: hotel
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
       SPRING_RABBITMQ_HOST: rabbitmq
 
   guest-service:
@@ -66,9 +66,9 @@ services:
     depends_on:
       - postgres
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hoteldb
-      SPRING_DATASOURCE_USERNAME: hotel
-      SPRING_DATASOURCE_PASSWORD: hotel
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
 
   housekeeping-service:
     build: ./hotel-housekeeping-service
@@ -78,9 +78,9 @@ services:
     depends_on:
       - postgres
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hoteldb
-      SPRING_DATASOURCE_USERNAME: hotel
-      SPRING_DATASOURCE_PASSWORD: hotel
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
 
   billing-service:
     build: ./hotel-billing-service
@@ -90,9 +90,9 @@ services:
     depends_on:
       - postgres
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hoteldb
-      SPRING_DATASOURCE_USERNAME: hotel
-      SPRING_DATASOURCE_PASSWORD: hotel
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
 
   notification-service:
     build: ./hotel-notification-service

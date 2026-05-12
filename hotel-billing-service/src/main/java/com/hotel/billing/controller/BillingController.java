@@ -7,7 +7,7 @@ import com.hotel.billing.service.BillingService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/billing")
+@RequestMapping("/api/billing")
 public class BillingController {
 
 

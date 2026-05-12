@@ -16,7 +16,7 @@ import java.util.List;
 */
 
 @RestController
-@RequestMapping("/booking")
+@RequestMapping("/api/booking")
 public class BookingController {
 
     private BookingService bookingService;
