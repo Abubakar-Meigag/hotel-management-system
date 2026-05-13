@@ -17,7 +17,7 @@ public class CheckoutEventListener {
         this.houseKeepingService = houseKeepingService;
     }
 
-    @RabbitListener(queues = RabbitMQConfig.CHECKOUT_QUEUE)
+    @RabbitListener(queues = RabbitMQConfig.CHECKOUT_HOUSEKEEPING_QUEUE)
     public void handleCheckout(Long bookingId) {
         HouseKeeping task = new HouseKeeping();
         task.setRoomId(bookingId);

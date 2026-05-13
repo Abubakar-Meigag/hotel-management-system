@@ -14,9 +14,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    public static final String CHECKOUT_QUEUE       = "checkout.queue";
-    public static final String CHECKOUT_EXCHANGE    = "checkout.exchange";
-    public static final String CHECKOUT_ROUTING_KEY = "checkout.routingkey";
+    public static final String CHECKOUT_FANOUT_EXCHANGE         = "checkout.fanout.exchange";
+    public static final String CHECKOUT_BILLING_QUEUE           = "checkout.billing.queue";
+    public static final String CHECKOUT_HOUSEKEEPING_QUEUE      = "checkout.housekeeping.queue";
+    public static final String CHECKOUT_NOTIFICATION_QUEUE      = "checkout.notification.queue";
 
     public static final String BOOKING_CONFIRMED_QUEUE       = "booking.confirmed.queue";
     public static final String BOOKING_CONFIRMED_EXCHANGE    = "booking.confirmed.exchange";
@@ -28,18 +29,23 @@ public class RabbitMQConfig {
 
     // Checkout
     @Bean
-    public Queue checkoutQueue() {
-        return new Queue(CHECKOUT_QUEUE);
+    public FanoutExchange checkoutFanoutExchange() {
+        return new FanoutExchange(CHECKOUT_FANOUT_EXCHANGE);
     }
 
     @Bean
-    public DirectExchange checkoutExchange() {
-        return new DirectExchange(CHECKOUT_EXCHANGE);
+    public Queue checkoutBillingQueue() {
+        return new Queue(CHECKOUT_BILLING_QUEUE);
     }
 
     @Bean
-    public Binding checkoutBinding(Queue checkoutQueue, DirectExchange checkoutExchange) {
-        return BindingBuilder.bind(checkoutQueue).to(checkoutExchange).with(CHECKOUT_ROUTING_KEY);
+    public Queue checkoutHousekeepingQueue() {
+        return new Queue(CHECKOUT_HOUSEKEEPING_QUEUE);
+    }
+
+    @Bean
+    public Queue checkoutNotificationQueue() {
+        return new Queue(CHECKOUT_NOTIFICATION_QUEUE);
     }
 
     // Booking Confirmed
@@ -74,30 +80,47 @@ public class RabbitMQConfig {
         return BindingBuilder.bind(bookingCancelledQueue).to(bookingCancelledExchange).with(BOOKING_CANCELLED_ROUTING_KEY);
     }
 
+    // Billing
+    @Bean
+    public Binding billingBinding() {
+        return BindingBuilder.bind(checkoutBillingQueue()).to(checkoutFanoutExchange());
+    }
+
+    @Bean
+    public Binding housekeepingBinding() {
+        return BindingBuilder.bind(checkoutHousekeepingQueue()).to(checkoutFanoutExchange());
+    }
+
+    @Bean
+    public Binding notificationCheckoutBinding() {
+        return BindingBuilder.bind(checkoutNotificationQueue()).to(checkoutFanoutExchange());
+    }
+
 
 }
 
 /*
-the three components are:
-Queue — a mailbox where messages wait until someone picks them up:
-checkout.queue → messages sit here waiting.
-Exchange — a post office that receives messages and decides where to send them:
-checkout.exchange → receives the message first.
-Binding + Routing Key — the rule that connects exchange to queue:
-if message has key "checkout.routingkey" → send to "checkout.queue".
+The three components:
+FanoutExchange — receives the message and broadcasts to ALL bound queues.
+No routing key needed — fanout ignores it.
+
+checkout.fanout.exchange → broadcasts to:
+  - checkout.billing.queue
+  - checkout.housekeeping.queue
+  - checkout.notification.queue
 */
 
 /*
 The full flow:
 BookingService publishes message
       ↓
-checkout.exchange receives it
+checkout.fanout.exchange receives it
       ↓
-sees routing key "checkout.routingkey"
+broadcasts to ALL three queues simultaneously
       ↓
-routes to checkout.queue
+BillingService        listens to checkout.billing.queue       → creates invoice
+HousekeepingService   listens to checkout.housekeeping.queue  → creates cleaning task
+NotificationService   listens to checkout.notification.queue  → sends email
       ↓
-BillingService, RoomService, etc listen to that queue
-      ↓
-each one reacts independently
+each one reacts independently and simultaneously
 */

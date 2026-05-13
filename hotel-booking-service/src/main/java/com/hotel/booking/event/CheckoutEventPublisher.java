@@ -17,8 +17,8 @@ public class CheckoutEventPublisher {
 
     public void publishCheckoutEvent(Long bookingId){
         rabbitTemplate.convertAndSend(
-                RabbitMQConfig.CHECKOUT_EXCHANGE,
-                RabbitMQConfig.CHECKOUT_ROUTING_KEY,
+                RabbitMQConfig.CHECKOUT_FANOUT_EXCHANGE,
+                "",
                 bookingId
         );
     }

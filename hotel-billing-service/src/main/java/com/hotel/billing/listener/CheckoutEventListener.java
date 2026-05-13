@@ -16,7 +16,7 @@ public class CheckoutEventListener {
         this.billingService = billingService;
     }
 
-    @RabbitListener(queues = RabbitMQConfig.CHECKOUT_QUEUE)
+    @RabbitListener(queues = RabbitMQConfig.CHECKOUT_BILLING_QUEUE)
     public void handleCheckout(Long bookingId){
         Invoice invoice = new Invoice();
         invoice.setBookingId(bookingId);

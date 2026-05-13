@@ -25,7 +25,7 @@ public class BookingEventListener {
         notificationService.sendBookingCancellation("guest@email.com");
     }
 
-    @RabbitListener(queues = RabbitMQConfig.CHECKOUT_QUEUE)
+    @RabbitListener(queues = RabbitMQConfig.CHECKOUT_NOTIFICATION_QUEUE)
     public void handleCheckout(Long bookingId) {
         notificationService.sendCheckInReminder("guest@email.com");
     }
