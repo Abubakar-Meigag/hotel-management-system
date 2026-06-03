@@ -90,6 +90,75 @@ Complete each phase before moving to the next.
 
 ---
 
+## Phase 8 — Docker
+
+**Goal:** Containerize each microservice so they run consistently anywhere.
+
+1. Create a `Dockerfile` for each service
+2. Build Docker images for all 6 services and the API gateway
+3. Update `docker-compose.yml` to build and run all services together
+4. Test the full system running inside Docker containers
+5. Verify all services connect to PostgreSQL and RabbitMQ inside Docker
+
+---
+
+## Phase 9 — Kubernetes
+
+**Goal:** Orchestrate the containers using Kubernetes locally with Minikube.
+
+1. Install Minikube and kubectl
+2. Create a `Deployment` manifest for each service
+3. Create a `Service` manifest for each service to expose ports
+4. Create a `ConfigMap` for shared configuration
+5. Create a `Secret` for database credentials
+6. Deploy all services to Minikube and verify they communicate
+7. Set up an Ingress controller to replace the API gateway
+
+---
+
+## Phase 10 — Istio
+
+**Goal:** Add a service mesh for traffic management and security.
+
+1. Install Istio on the Minikube cluster
+2. Enable automatic sidecar injection
+3. Create `VirtualService` and `DestinationRule` for each service
+4. Configure mTLS between services
+5. Test traffic routing and load balancing
+6. Visualize the service mesh using Kiali dashboard
+
+---
+
+## Phase 11 — Argo CD
+
+**Goal:** Set up a GitOps deployment pipeline.
+
+1. Install Argo CD on the Kubernetes cluster
+2. Connect Argo CD to your GitHub repository
+3. Create an Argo CD `Application` manifest
+4. Configure auto-sync so every git push deploys automatically
+5. Test the pipeline by pushing a change and watching it deploy
+
+---
+
+## Phase 12 — Monitoring
+
+**Goal:** Monitor all services with Prometheus and Grafana.
+
+1. Deploy Prometheus to the Kubernetes cluster
+2. Configure Spring Boot Actuator endpoints for metrics collection
+3. Deploy Grafana and connect it to Prometheus
+4. Create dashboards for each service showing request rates and errors
+5. Set up alerts for service downtime
+
+---
+
+## Phase 14 → GitHub Actions CI/CD pipeline (deploys to AWS)
+
+**Goal:**....
+
+---
+
 ## Summary
 
 | Phase | What You Build              | OOP Concept               |

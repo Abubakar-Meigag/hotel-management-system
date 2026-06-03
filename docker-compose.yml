@@ -20,7 +20,9 @@ services:
       - "15672:15672"
 
   api-gateway:
-    build: ./hotel-api-gateway
+    build:
+      context: .
+      dockerfile: hotel-api-gateway/Dockerfile
     container_name: hotel-api-gateway
     ports:
       - "8080:8080"
@@ -33,7 +35,9 @@ services:
       - notification-service
 
   room-service:
-    build: ./hotel-room-service
+    build:
+      context: .
+      dockerfile: hotel-room-service/Dockerfile
     container_name: hotel-room-service
     ports:
       - "8081:8081"
@@ -45,7 +49,9 @@ services:
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
 
   booking-service:
-    build: ./hotel-booking-service
+    build:
+      context: .
+      dockerfile: hotel-booking-service/Dockerfile
     container_name: hotel-booking-service
     ports:
       - "8082:8082"
@@ -59,7 +65,9 @@ services:
       SPRING_RABBITMQ_HOST: rabbitmq
 
   guest-service:
-    build: ./hotel-guest-service
+    build:
+      context: .
+      dockerfile: hotel-guest-service/Dockerfile
     container_name: hotel-guest-service
     ports:
       - "8083:8083"
@@ -71,7 +79,9 @@ services:
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
 
   housekeeping-service:
-    build: ./hotel-housekeeping-service
+    build:
+      context: .
+      dockerfile: hotel-housekeeping-service/Dockerfile
     container_name: hotel-housekeeping-service
     ports:
       - "8084:8084"
@@ -81,9 +91,12 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      SPRING_RABBITMQ_HOST: rabbitmq
 
   billing-service:
-    build: ./hotel-billing-service
+    build:
+      context: .
+      dockerfile: hotel-billing-service/Dockerfile
     container_name: hotel-billing-service
     ports:
       - "8085:8085"
@@ -93,9 +106,12 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      SPRING_RABBITMQ_HOST: rabbitmq
 
   notification-service:
-    build: ./hotel-notification-service
+    build:
+      context: .
+      dockerfile: hotel-notification-service/Dockerfile
     container_name: hotel-notification-service
     ports:
       - "8086:8086"
