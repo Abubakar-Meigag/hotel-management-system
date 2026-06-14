@@ -102,7 +102,7 @@ Complete each phase before moving to the next.
 
 ---
 
-The main application from phase 9 it impelment in this repo:
+The main application from phase 9 is implemented in this repo:
 https://github.com/Abubakar-Meigag/hotel-management-k8s
 
 ## Phase 9 — Kubernetes
