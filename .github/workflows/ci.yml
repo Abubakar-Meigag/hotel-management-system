@@ -114,7 +114,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          dockerfile: ${{ matrix.service }}/Dockerfile
+          file: ${{ matrix.service }}/Dockerfile
           push: true
           tags: |
             ${{ matrix.image }}:${{ steps.tag.outputs.tag }}
