@@ -29,11 +29,12 @@ jobs:
           cat changed_files.txt
 
           check_service() {
-            local service=$1
-            if grep -q "^$service/" changed_files.txt || grep -q "^hotel-common/" changed_files.txt; then
-              echo "$service=true" >> $GITHUB_OUTPUT
+            local folder=$1
+            local key=$2
+            if grep -q "^$folder/" changed_files.txt || grep -q "^hotel-common/" changed_files.txt; then
+              echo "$key=true" >> $GITHUB_OUTPUT
             else
-              echo "$service=false" >> $GITHUB_OUTPUT
+              echo "$key=false" >> $GITHUB_OUTPUT
             fi
           }
 
