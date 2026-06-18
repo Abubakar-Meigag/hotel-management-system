@@ -32,5 +32,5 @@ public class RoomController {
     public Room updateRoom(@PathVariable Long id, @RequestParam RoomStatus status){
         return roomService.updateRoomStatus(id, status);
     }
-
+// command to test the ci workflow
 }
