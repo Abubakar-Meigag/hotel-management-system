@@ -38,13 +38,13 @@ jobs:
             fi
           }
 
-          check_service "hotel-api-gateway"
-          check_service "hotel-room-service"
-          check_service "hotel-booking-service"
-          check_service "hotel-guest-service"
-          check_service "hotel-housekeeping-service"
-          check_service "hotel-billing-service"
-          check_service "hotel-notification-service"
+          check_service "hotel-api-gateway" "api-gateway"
+          check_service "hotel-room-service" "room-service"
+          check_service "hotel-booking-service" "booking-service"
+          check_service "hotel-guest-service" "guest-service"
+          check_service "hotel-housekeeping-service" "housekeeping-service"
+          check_service "hotel-billing-service" "billing-service"
+          check_service "hotel-notification-service" "notification-service"
 
   build-and-push:
     needs: detect-changes
