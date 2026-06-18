@@ -33,5 +33,5 @@ public class RoomController {
         return roomService.updateRoomStatus(id, status);
     }
 
-
+// this command for testing the ci pipeline
 }
