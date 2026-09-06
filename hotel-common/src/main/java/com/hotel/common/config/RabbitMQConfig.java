@@ -64,7 +64,7 @@ public class RabbitMQConfig {
         return BindingBuilder.bind(bookingConfirmedQueue).to(bookingConfirmedExchange).with(BOOKING_CONFIRMED_ROUTING_KEY);
     }
 
-    // Booking Cancelled
+    // Booking Canceled
     @Bean
     public Queue bookingCancelledQueue() {
         return new Queue(BOOKING_CANCELLED_QUEUE);
